@@ -8,6 +8,7 @@ public class Menu {
     private String tempName;
 
     public void Main() {
+        System.err.println("\n");
         System.out.println("**************************************************");
         System.out.println("                  전화번호부");
         System.out.println("**************************************************");
