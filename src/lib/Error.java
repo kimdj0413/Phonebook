@@ -1,7 +1,13 @@
 package lib;
 
-class NumberErrorException extends Exception{
-    public NumberErrorException(String msg){
+class NumberException extends Exception {
+    public NumberException(String msg) {
+        super(msg);
+    }
+}
+
+class RelationException extends Exception {
+    public RelationException(String msg) {
         super(msg);
     }
 }

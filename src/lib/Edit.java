@@ -1,8 +1,8 @@
 package lib;
 
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.HashMap;
-// import lib.TError;
 
 public class Edit {
     Error error = new Error();
@@ -14,9 +14,10 @@ public class Edit {
     private Integer keyTemp;
     private String tempName;
     private String tempNum;
+    private String tempClass;
 
     public void thisIs(HashMap<Integer, String> nameMap, HashMap<Integer, String> numberMap,
-    HashMap<Integer, String> addressMap, HashMap<Integer, String> classMap, Integer keyTemp, String tempName){
+            HashMap<Integer, String> addressMap, HashMap<Integer, String> classMap, Integer keyTemp, String tempName) {
         this.nameMap = nameMap;
         this.numberMap = numberMap;
         this.addressMap = addressMap;
@@ -41,22 +42,32 @@ public class Edit {
         thisIs(nameMap, numberMap, addressMap, classMap, keyTemp, null);
         System.out.print("이름을 입력하세요 : ");
         String tempName = scan.nextLine();
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.print("번호를 입력하세요 : ");
                 tempNum = scan.nextLine();
-                if(tempNum.startsWith("010")==false){
-                    throw new NumberErrorException("010으로 시작하세요!");
+                if (tempNum.startsWith("010") == false) {
+                    throw new NumberException("010으로 시작하세요!");
                 }
                 break;
-            } catch(NumberErrorException e){
+            } catch (NumberException e) {
                 System.out.println(e.getMessage());
             }
         }
         System.out.print("주소를 입력하세요 : ");
         String tempAdd = scan.nextLine();
-        System.out.print("관계를 입력하세요 : ");
-        String tempClass = scan.nextLine();
+        while (true) {
+            try {
+                System.out.print("관계를 입력하세요 : ");
+                String tempClass = scan.nextLine();
+                if (!Arrays.asList("가족", "친구", "회사", "기타").contains(tempClass)) {
+                    throw new RelationException("가족, 친구, 회사, 기타 중 하나를 입력하세요!");
+                }
+                break;
+            } catch (RelationException e) {
+                System.out.println(e.getMessage());
+            }
+        }
         nameMap.put(keyTemp, tempName);
         numberMap.put(keyTemp, tempNum);
         addressMap.put(keyTemp, tempAdd);
@@ -65,7 +76,7 @@ public class Edit {
 
     public void Remove(HashMap<Integer, String> nameMap, HashMap<Integer, String> numberMap,
             HashMap<Integer, String> addressMap, HashMap<Integer, String> classMap, Integer keyTemp) {
-                thisIs(nameMap, numberMap, addressMap, classMap, keyTemp, null);
+        thisIs(nameMap, numberMap, addressMap, classMap, keyTemp, null);
 
         nameMap.remove(keyTemp);
         numberMap.remove(keyTemp);

@@ -37,14 +37,13 @@ public class Phonebook {
                 System.out.println("\n1 ~ 5번 숫자를 입력해주세요!");
                 scan.nextLine();
             }
-            
+
             switch (menuNum) {
                 case 1:
                     for (Integer key : nameMap.keySet()) {
                         System.out.println(nameMap.get(key) + "\t" + numberMap.get(key) + "\t" + addressMap.get(key)
                                 + "\t" + classMap.get(key));
                     }
-
                     continue;
                 case 2:
                     tempName = menu.Edit(dummy, scan, tempName);
